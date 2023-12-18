@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kal playground</title>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        var btn = document.getElementById("execute-button");
+        var srcDom = document.getElementById("source");
+        var destDom = document.getElementById("executed-result");
+        btn.addEventListener("click", () => {
+          try {
+            var src = srcDom.value;
+            var executedResult = window.kal.execute(src);
+            destDom.innerHTML = executedResult;
+          } catch (e) {
+            destDom.innerHTML = e.message;
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <textarea cols="80" rows="20" id="source"></textarea>
+    <button type="button" id="execute-button">execute</button>
+    <p id="executed-result"></p>
+    <script src="./kal/index.js"></script>
+  </body>
+</html>
