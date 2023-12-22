@@ -1,5 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
+import Dropdown from "../components/Dropdown.astro";
+import DropdownItem from "../components/DropdownItem.astro";
 ---
 
 <Base>
@@ -22,19 +24,36 @@ import Base from "../layouts/Base.astro";
         placeholder="(Enter your code here)"
       ></textarea>
       <div class="flex-none mt-3">
-        <button
-          type="button"
-          id="execute-button"
-          class="text-purple-50 bg-purple-500 hover:bg-purple-400 py-2 px-4 rounded-md"
-        >Execute</button>
+        <div>
+          <button
+            type="button"
+            id="execute-button"
+            class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 focus:ring-4 focus:outline-none focus:ring-purple-200 rounded-md text-[16px] px-6 py-2 text-center me-2 mb-2"
+          >Execute 🗡️</button>
+
+          <Dropdown label="Examples ⚔️">
+            <DropdownItem><div id="example-factorial" class="py-2 px-4">Factorial</div></DropdownItem>
+          </Dropdown>
+        </div>
         <div
           id="executed-result"
-          class="mt-3 p-3 border border-slate-700 h-20 rounded-md text-slate-200 font-mono"
+          class="p-3 border border-slate-700 h-40 rounded-md text-slate-200 font-mono"
         >(Result)</div>
       </div>
     </div>
   </div>
 </Base>
+
+<script>
+import { factorial } from "./examples";
+
+const exampleFactorial = document.getElementById("example-factorial") as HTMLButtonElement;
+const source = document.getElementById("source") as HTMLTextAreaElement;
+exampleFactorial.addEventListener("click", () => {
+  source.value = factorial;
+  source.focus();
+});
+</script>
 
 <script is:inline>
 const btn = document.getElementById("execute-button");
