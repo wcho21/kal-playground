@@ -37,7 +37,7 @@ import DropdownItem from "../components/DropdownItem.astro";
         </div>
         <div
           id="executed-result"
-          class="p-3 border border-slate-700 h-40 rounded-md text-slate-200 font-mono"
+          class="p-3 border border-slate-700 h-40 rounded-md text-slate-200 font-mono whitespace-pre-line"
         >(Result)</div>
       </div>
     </div>
@@ -45,27 +45,12 @@ import DropdownItem from "../components/DropdownItem.astro";
 </Base>
 
 <script>
-import { factorial } from "./examples";
+  import { factorial } from "./examples";
 
-const exampleFactorial = document.getElementById("example-factorial") as HTMLButtonElement;
-const source = document.getElementById("source") as HTMLTextAreaElement;
-exampleFactorial.addEventListener("click", () => {
-  source.value = factorial;
-  source.focus();
-});
-</script>
-
-<script is:inline>
-const btn = document.getElementById("execute-button");
-const srcDom = document.getElementById("source");
-const destDom = document.getElementById("executed-result");
-btn.addEventListener("click", () => {
-  try {
-    var src = srcDom.value;
-    var executedResult = kal.execute(src);
-    destDom.innerHTML = executedResult;
-  } catch (e) {
-    destDom.innerHTML = e.message;
-  }
-});
+  const exampleFactorial = document.getElementById("example-factorial") as HTMLButtonElement;
+  const source = document.getElementById("source") as HTMLTextAreaElement;
+  exampleFactorial.addEventListener("click", () => {
+    source.value = factorial;
+    source.focus();
+  });
 </script>

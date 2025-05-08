@@ -18,7 +18,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/gh/wcho21/kal@0.1.0/dist/index.min.js"></script>
+    <script type="module">
+      import { execute } from "https://cdn.jsdelivr.net/gh/wcho21/kal@0.3.1/dist/index.min.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("execute-button");
+        const srcDom = document.getElementById("source");
+        const destDom = document.getElementById("executed-result");
+
+        btn.addEventListener("click", () => {
+          const source = srcDom.value;
+          const stdouts = [];
+          const executed = execute(source, stdout => stdouts.push(stdout));
+
+          const output = [executed].concat(stdouts).join("\n");
+          destDom.textContent = output;
+        });
+      });
+    </script>
   </head>
   <body>
     <slot />
